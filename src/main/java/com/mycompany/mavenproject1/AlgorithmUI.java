@@ -62,6 +62,7 @@ public class AlgorithmUI  {
             currentState.calculateF(target);
             
             if (currentState.isGoalState(target)) {
+                currentState.setIsTarget(true);
                 return currentState;
             } else {
                 java.util.List<Node> nextStates = currentState.generateState();
@@ -88,10 +89,6 @@ public class AlgorithmUI  {
     }
 
     public void process() {
-//        System.out.println("NHẬP TRẠNG THÁI BẮT ĐẦU");
-//        start.input();
-//        System.out.println("NHẬP TRẠNG THÁI KẾT THÚC");
-//        target.input();
         if (isSolvable(start, target)) {
             this.result = solver();
             Node result1=this.result;

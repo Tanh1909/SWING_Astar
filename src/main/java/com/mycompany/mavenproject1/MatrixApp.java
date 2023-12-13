@@ -6,6 +6,7 @@ package com.mycompany.mavenproject1;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 /**
@@ -390,9 +391,15 @@ public class MatrixApp extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        AstarFrame astarFrame = new AstarFrame(start,target);
         input();
-        AstarFrame af=new AstarFrame(start, target);
-        af.init();
-        af.setVisible(true);
+        if(AlgorithmUI.isSolvable(start, target)){
+          AstarFrame af=new AstarFrame(start, target);
+            af.init();
+            af.setVisible(true);   
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Không thể giải được");
+        }
+       
         
     
     }//GEN-LAST:event_jButton1ActionPerformed

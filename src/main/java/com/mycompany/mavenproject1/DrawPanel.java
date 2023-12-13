@@ -4,18 +4,98 @@
  */
 package com.mycompany.mavenproject1;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Stroke;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author dtien
  */
 public class DrawPanel extends javax.swing.JPanel {
 
+    private boolean isCheck = false;
+    private int cellSize=30;
+    private Node[] arr;
+    private int index;
     /**
      * Creates new form DrawPanel
      */
     public DrawPanel() {
         initComponents();
+         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+         this.setBackground(Color.white);
+           for (int i = 1; i <= 1000; i++) {
+                JLabel label = new JLabel(i+"");
+                this.add(label);
+            }
+    
     }
+ 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (isCheck) {
+             for(int i=0;i<=index;i++){
+                 if(arr[i].isIsTarget()){
+                     drawMatrix(g, arr[i]);
+                     drawLine(g, arr[i]);    
+                    break; 
+                 }
+                 drawMatrix(g, arr[i]);
+                 if(i!=0){
+                 drawLine(g, arr[i]);    
+                 }
+                 
+             }
+        }
+    }
+
+    public void drawTree(int index, Node[] arr) {
+        isCheck = true;
+        this.index=index;
+        this.arr=arr;
+        repaint();
+    }
+     private void drawMatrix(Graphics g, Node node) {
+        int x=node.getX();
+        int y=node.getY();
+        int[][] matrix=new int[3][3];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                g.drawRect(x + j * cellSize+3, y + i * cellSize-3, cellSize, cellSize);
+                g.drawString(String.valueOf(node.getBoard().get(i).get(j)), x + j * cellSize + cellSize / 2, y + i * cellSize + cellSize / 2);
+            }
+        }
+        g.drawString("G= " +node.getG(),x+3*cellSize/2-30,y-10);
+        g.drawString("F= " +node.getF(),x+3*cellSize/2,y-10);
+    }
+     private void drawLine(Graphics g,Node node){
+         int x1=node.getParents().getX()+3*cellSize/2;
+         int y1=node.getParents().getY()+3*cellSize-2;
+         int x2=node.getX()+3*cellSize/2;
+         int y2=node.getY()-2;
+         if(node.isCheck()){
+             g.setColor(Color.red);
+            Graphics2D g2d = (Graphics2D) g;
+            Stroke oldStroke = g2d.getStroke();
+            g2d.setStroke(new BasicStroke(3)); // Đặt độ dày là 5 pixel
+            // Vẽ đường từ điểm (50, 50) đến điểm (300, 300)
+            g2d.drawLine(x1, y1, x2, y2);
+            // Khôi phục độ dày ban đầu
+            g2d.setStroke(oldStroke);
+         }
+         g.setColor(Color.black);
+        g.drawLine(x1, y1, x2, y2);
+         
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
