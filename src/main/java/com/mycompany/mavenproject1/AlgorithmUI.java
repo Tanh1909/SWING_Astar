@@ -62,7 +62,6 @@ public class AlgorithmUI  {
             currentState.calculateF(target);
             
             if (currentState.isGoalState(target)) {
-                currentState.setIsTarget(true);
                 return currentState;
             } else {
                 java.util.List<Node> nextStates = currentState.generateState();

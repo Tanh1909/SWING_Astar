@@ -65,6 +65,7 @@ public class AstarFrame extends JFrame {
         for (Node x : listXy) {
             arr[x.getCount()] = x;
         }
+        System.out.println("Chi phí đến đích: "+(listXy.size()-1));
         Thread drawingThread = new Thread(() -> {
             while (index++ < listXy.size() - 1) {
                 dp.drawTree(index, arr);

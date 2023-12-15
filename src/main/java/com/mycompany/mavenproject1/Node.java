@@ -23,7 +23,6 @@ public class Node {
     private int y;
     private boolean check = false;
     private int count;
-    private boolean isTarget=false;
     public Node() {
 
     }
@@ -203,12 +202,5 @@ public class Node {
         this.count = count;
     }
 
-    public boolean isIsTarget() {
-        return isTarget;
-    }
-
-    public void setIsTarget(boolean isTarget) {
-        this.isTarget = isTarget;
-    }
     
 }

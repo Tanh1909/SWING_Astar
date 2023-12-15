@@ -44,11 +44,6 @@ public class DrawPanel extends javax.swing.JPanel {
 
         if (isCheck) {
              for(int i=0;i<=index;i++){
-                 if(arr[i].isIsTarget()){
-                     drawMatrix(g, arr[i]);
-                     drawLine(g, arr[i]);    
-                    break; 
-                 }
                  drawMatrix(g, arr[i]);
                  if(i!=0){
                  drawLine(g, arr[i]);    
